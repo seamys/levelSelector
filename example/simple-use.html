@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../libs/jquery/jquery.js"></script>
+    <script src="../dist/jquery.levelSelector.min.js"></script>
+    <script src="js/address.js"></script>
+    <style type="text/css">
+        body { width: 800px; margin: 20px auto; }
+        body > div { margin-top: 30px; }
+        .title { padding: 5px; font-size: 1.5em; }
+        .show { font-weight: bolder; padding: 0 5px; font-size: 1em; }
+    </style>
+</head>
+<body>
+    <h1>Simple to use</h1>
+    <div>
+        <a href="js/address.js">download script data resource</a> to view.
+    </div>
+    <div id="example-1">
+        <div class="title">
+            <label>Simple usage:</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+        <script type="text/javascript">
+            $("#example-1 .levelSelector").levelSelector({
+                change: function (v) {
+                    $(this).prev("div").find(".show").text(v.join());
+                },
+                provider: function (params, callback) {
+                    var data = [];
+                    var id = params[params.length - 1];
+                    $.each(address, function (i, v) {
+                        if (v.ParentId == id) {
+                            data.push(v);
+                        }
+                    });
+                    callback(data);
+                }
+            });
+        </script>
+    </div>
+    <div id="example-2">
+        <div class="title">
+            <label>Initialization had already selected::</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+        <script type="text/javascript">
+            $("#example-2 .levelSelector").levelSelector({
+                path: '0,2,38,65',
+                change: function (v) {
+                    $(this).prev("div").find(".show").text(v.join());
+                },
+                provider: function (params, callback) {
+                    var data = [];
+                    var id = params[params.length - 1];
+                    $.each(address, function (i, v) {
+                        if (v.ParentId == id) {
+                            data.push(v);
+                        }
+                    });
+                    callback(data);
+                }
+            });
+        </script>
+    </div>
+    <div id="example-3">
+        <div class="title">
+            <label>When Select value changed callback:</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+        <script type="text/javascript">
+            $("#example-3 .levelSelector").levelSelector({
+                path: '0,2,38,65',
+                change: function (v) {
+                    $(this).prev("div").find(".show").text(v.join());
+                    alert(v.join());
+                },
+                provider: function (params, callback) {
+                    var data = [];
+                    var id = params[params.length - 1];
+                    $.each(address, function (i, v) {
+                        if (v.ParentId == id) {
+                            data.push(v);
+                        }
+                    });
+                    callback(data);
+                }
+            });
+        </script>
+    </div>
+    <div id="example-4">
+        <div class="title">
+            <label>Using '|' to split path:</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+        <script type="text/javascript">
+            $("#example-4 .levelSelector").levelSelector({
+                path: '0|2|38|65',
+                sChar: '|',
+                change: function (v) {
+                    $(this).prev("div").find(".show").text(v.join('|'));
+                },
+                provider: function (params, callback) {
+                    var data = [];
+                    var id = params[params.length - 1];
+                    $.each(address, function (i, v) {
+                        if (v.ParentId == id) {
+                            data.push(v);
+                        }
+                    });
+                    callback(data);
+                }
+            });
+        </script>
+    </div>
+    <div id="example-5">
+        <div class="title">
+            <label>Specify a special selection of text:</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+        <script type="text/javascript">
+            $("#example-5 .levelSelector").levelSelector({
+                defOption: "默认选项..",
+                change: function (v) {
+                    $(this).prev("div").find(".show").text(v.join());
+                },
+                provider: function (params, callback) {
+                    var data = [];
+                    var id = params[params.length - 1];
+                    $.each(address, function (i, v) {
+                        if (v.ParentId == id) {
+                            data.push(v);
+                        }
+                    });
+                    callback(data);
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

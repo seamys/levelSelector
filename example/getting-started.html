@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Getting Started</title>
+    <meta charset="utf-8" />
+    <script src="../libs/jquery/jquery.js"></script>
+    <script src="../dist/jquery.levelSelector.min.js"></script>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var data = {
+            id_0: [{ Id: 1, Name: '服装' }, { Id: 2, Name: '鞋包' }],
+            id_1: [{ Id: 3, Name: '男装' }, { Id: 4, Name: '女装' }],
+            id_2: [{ Id: 5, Name: '男鞋' }, { Id: 6, Name: '女鞋' }, { Id: 7, Name: '箱包' }],
+            id_3: [{ Id: 8, Name: '男式上装' }, { Id: 9, Name: '男式裤子' }],
+            id_4: [{ Id: 7, Name: '女式裙子' }, { Id: 8, Name: '女式裤子' }]
+        }
+    </script>
+    <div id="show"></div>
+    <div class="levelSelector"></div>
+    <script type="text/javascript">
+        $(".levelSelector").levelSelector({
+            change: function (v) {
+                $("#show").text(v.join());
+            },
+            provider: function (params, callback) {
+                var id = params[params.length - 1];
+                callback(data["id_" + id]);
+            }
+        });
+    </script>
+</body>
+</html>

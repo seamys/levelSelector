@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/3.0.0-beta1/jquery.min.js"></script>
+    <script src="https://raw.githubusercontent.com/seamys/levelSelector/master/dist/jquery.levelSelector.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h3>普通异步选取</h3>
+            <div id="levelSelector-1"></div>
+            <script type="text/javascript">
+                $("#levelSelector-1").levelSelector({
+                    url: '/address/',
+                    param: function (arrays) {
+                        console.log(arrays.join());
+                        return { id: arrays[arrays.length - 1] }
+                    }
+                });
+            </script>
+        </div>
+        <div>
+            <h3>数据异步还原选取</h3>
+            <div id="levelSelector-2"></div>
+            <script type="text/javascript">
+                $("#levelSelector-2").levelSelector({
+                    url: '/address/',
+                    path: '0,3,78,1170,5565',
+                    param: function (arrays) {
+                        return { id: arrays[arrays.length - 1] }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>

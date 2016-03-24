@@ -1,0 +1,29 @@
+{
+    "name": "levelSelector",
+    "description": "Simple and flexible multi-level selection jQuery plugin",
+    "main": "dist/jquery.levelSelector.min.js",
+    "authors": [
+        "seamys(yiim@foxmail.com)"
+    ],
+    "license": "MIT",
+    "keywords": [
+        "multi-level-selection"
+    ],
+    "moduleType": [
+        "globals"
+    ],
+    "dependencies": {
+        "jquery": ">=1.6"
+    },
+    "homepage": "http://www.frllk.com/levelSelector",
+    "ignore": [
+        "/*.*",
+        "!README.md",
+        "libs",
+        "example",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}
