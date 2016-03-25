@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>local data example</title>
+    <meta charset="utf-8" />
+    <script src="../libs/jquery/jquery.js"></script>
+    <script src="../dist/jquery.levelSelector.min.js"></script>
+    <!-- This script resource from zhaopin (http://img01.zhaopin.cn/2012/js/basedata.js )-->
+    <script src="js/basedata.js"></script>
+    <style type="text/css">
+        body { width: 800px; margin: 20px auto; }
+        body > div { margin-top: 30px; }
+        .title { padding: 5px; font-size: 1.5em; }
+        .show { font-weight: bolder; padding: 0 5px; font-size: 1em; }
+    </style>
+    <script type="text/javascript">
+        //format data common function
+        var format = function (data, id) {
+            var ls = [];
+            var reg = /(\|(\d+))?@(\d+)\|([^|]+)/ig;
+            var result;
+            while ((result = reg.exec(data)) != null) {
+                if (result[2] == id) {
+                    ls.push({ Id: result[3], Name: result[4] });
+                }
+            }
+            return ls;
+        }
+    </script>
+</head>
+<body>
+    <h1>Used in complex data formats</h1>
+    <div>
+        This script data resource from zhaopin (http://www.zhaopin.com/ ),You can <a href="http://img01.zhaopin.cn/2012/js/basedata.js">download it</a> to view.
+        We use it to demonstrate plugin complex data formats
+    </div>
+    <div class="Industry">
+        <div class="title">
+            <label>Simple usage:</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+    </div>
+    <div class="Industry">
+        <div class="title">
+            <label>Initialization had already selected:</label><span class="show">0,10900,201300,829</span>
+        </div>
+        <div class="levelSelector" val="0,10900,201300,829"></div>
+    </div>
+    <script type="text/javascript">
+        $(".Industry .levelSelector").levelSelector({
+            change: function (v) {
+                $(this).prev("div").find(".show").text(v.join());
+            },
+            provider: function (params, callback) {
+                switch (params.length) {
+                    case 1:
+                        var data = [];
+                        $.each(industryClass, function (i, v) {
+                            data.push({ Id: v.id, Name: v.name });
+                        });
+                        callback(data);
+                        break;
+                    case 2:
+                        callback(format(dIndustry, params[params.length - 1]));
+                        break;
+                    case 3:
+                        callback(format(dSubjobtype, params[params.length - 1]));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    </script>
+    <div class="address">
+        <div class="title">
+            <label>Choose China address:</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+    </div>
+    <script type="text/javascript">
+        //Repair data formatting issues
+        dCity = dCity.replace("@489|全国|0@530", "|0@489|全国|489@530");
+        $(".address .levelSelector").levelSelector({
+            path: '0,489,530,2008',
+            change: function (v) {
+                $(this).prev("div").find(".show").text(v.join());
+            },
+            provider: function (params, callback) {
+                switch (params.length) {
+                    case 1:
+                        callback(format(dCity, params[params.length - 1]));
+                        break;
+                    case 2:
+                        callback(format(dCity, params[params.length - 1]));
+                        break;
+                    case 3:
+                        callback(format("|0" + dDistrict, params[params.length - 1]));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    </script>
+    <div class="job">
+        <div class="title">
+            <label>Choose occupational categories:</label><span class="show"></span>
+        </div>
+        <div class="levelSelector"></div>
+    </div>
+    <script type="text/javascript">
+    $(".job .levelSelector").levelSelector({
+        change: function(v) {
+            $(this).prev("div").find(".show").text(v.join());
+        },
+        provider: function(params, callback) {
+            switch (params.length) {
+            case 1:
+                var data = [];
+                $.each(jobtypeClass, function(i, v) {
+                    data.push({ Id: v.id, Name: v.name });
+                });
+                callback(data);
+                break;
+            case 2:
+                callback(format("|20" + dJobtype, params[params.length - 1]));
+                break;
+            case 3:
+                callback(format("|100000" + dSubjobtype, params[params.length - 1]));
+                break;
+            default:
+                break;
+            }
+        }
+    });
+    </script>
+</body>
+</html>

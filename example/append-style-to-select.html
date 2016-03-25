@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../libs/jquery/jquery.js"></script>
+    <script src="../dist/jquery.levelSelector.min.js"></script>
+    <script src="js/address.js"></script>
+    <style type="text/css">
+        .select-0 { background: #808080; }
+        .select-1 { background: #ffd800; }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="levelSelector"></div>
+        <script type="text/javascript">
+            $(".levelSelector").levelSelector({
+                create: function () {
+                    var a = $(this).find("select").length % 2;
+                    console.log(this);
+                    return $('<select class="select-' + a + '">');
+                },
+                provider: function (params, callback) {
+                    var data = [];
+                    var id = params[params.length - 1];
+                    $.each(address, function (i, v) {
+                        if (v.ParentId == id) {
+                            data.push(v);
+                        }
+                    });
+                    callback(data);
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
