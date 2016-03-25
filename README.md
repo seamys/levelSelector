@@ -1,6 +1,7 @@
 # JQuery 无限级下拉选择插件
 
-插件主要应对无限级树型结构的数据。比如说国家、省、市、区、县级市、村、街道的选择，还有一些B2B之类的网站无限极分类。无论本地数据还是异步获取这些在后端系统对内容进行归类是常常用到。`jQuery.levelSelector.js` 就是为了解决此问题的。
+插件主要应对无限级树型结构的数据。比如说国家、省、市、区、县级市、村、街道的选择，还有一些B2B之类的网站无限极分类。
+无论本地数据还是异步获取这些在后端系统对内容进行归类是常常用到。`jQuery.levelSelector.js` 就是为了解决此问题的。
 
 ![](http://images2015.cnblogs.com/blog/329473/201603/329473-20160324114449058-1763367235.gif)
 
@@ -42,7 +43,7 @@ var data = {
            $("#show").text(v.join());
          },
          //数据提供回调方法
-         provider: function (params, url, callback) {
+         provider: function (params, callback) {
              var id = params[params.length - 1];
              callback(data["id_" + id]);
          }
