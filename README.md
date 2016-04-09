@@ -21,6 +21,7 @@
 ### 2. 数据脚本格式
 
 我们简单使用一些数据来填充使用（并非一定需要使用当前格式后面详细介绍使用）。
+
 ``` javascipt
 var data = {
      id_0: [{ Id: 1, Name: '服装' }, { Id: 2, Name: '鞋包' }],
@@ -38,7 +39,7 @@ var data = {
 <div class="levelSelector"></div>
 <script type="text/javascript">
     $(".levelSelector").levelSelector({
-        //select 值修改后触发此回调方法 
+        //select 中任意值修改后触发此回调方法 
         change: function (v) {
            $("#show").text(v.join());
          },
@@ -56,6 +57,10 @@ var data = {
 
 ![image](http://images2015.cnblogs.com/blog/329473/201603/329473-20160324114331042-385521810.gif)
 
+## 使用 bower 安装
+``` sh
+ bower install levelSelector
+```
 ## 参数说明
 
 
